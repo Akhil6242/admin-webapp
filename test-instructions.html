@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Validation Portal - Test Instructions</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #4285f4;
+            border-bottom: 2px solid #4285f4;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #3367d6;
+            margin-top: 30px;
+        }
+        .step {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #4285f4;
+        }
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .note {
+            background-color: #fffde7;
+            border-left: 4px solid #fbbc05;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        .important {
+            background-color: #fbe9e7;
+            border-left: 4px solid #ea4335;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Validation Portal - Test Instructions</h1>
+    
+    <p>This document provides instructions for testing the Admin Validation Portal web application. Follow these steps to verify that all functionality works as expected.</p>
+    
+    <div class="important">
+        <strong>Important:</strong> Before testing, you need to update the Firebase configuration in <code>js/config.js</code> with your actual Firebase project details.
+    </div>
+    
+    <h2>Prerequisites</h2>
+    <ul>
+        <li>A Firebase project with Firestore enabled</li>
+        <li>Admin user(s) added to the <code>admin_webapp</code> collection with fields:
+            <ul>
+                <li><code>username</code>: Email address for login</li>
+                <li><code>Name</code>: Admin's name</li>
+                <li><code>phone</code>: Phone number for OTP verification</li>
+                <li><code>otpVerified</code>: Boolean flag (initially false)</li>
+            </ul>
+        </li>
+        <li>Test user data in the <code>users</code> collection with fields:
+            <ul>
+                <li><code>Name</code>: User's name</li>
+                <li><code>Registration no.</code>: User's registration number</li>
+                <li><code>Course</code>: User's course</li>
+                <li><code>Year</code>: User's year</li>
+                <li><code>Mobile Number</code>: User's mobile number</li>
+                <li><code>Email</code>: User's email</li>
+            </ul>
+        </li>
+        <li>An empty <code>verifiedUser</code> collection to store validated users</li>
+    </ul>
+    
+    <h2>Test Plan</h2>
+    
+    <div class="step">
+        <h3>1. Admin Login Testing</h3>
+        <ol>
+            <li>Open the application in a web browser</li>
+            <li>Verify that the login form is displayed</li>
+            <li>Try logging in with invalid credentials and verify error handling</li>
+            <li>Log in with valid admin credentials</li>
+            <li>Verify that the OTP form is displayed</li>
+            <li>Enter a valid OTP (for testing, any 6-digit number works)</li>
+            <li>Verify that the dashboard is displayed after successful OTP verification</li>
+            <li>Test the "Resend OTP" functionality</li>
+        </ol>
+    </div>
+    
+    <div class="step">
+        <h3>2. User Data Retrieval Testing</h3>
+        <ol>
+            <li>Verify that user data is loaded and displayed in the table</li>
+            <li>Test the search functionality by entering a user name or registration number</li>
+            <li>Test the filter dropdown to filter users by status</li>
+            <li>Verify that the "No users found" message is displayed when appropriate</li>
+            <li>Verify that the loading indicator is displayed during data loading</li>
+        </ol>
+    </div>
+    
+    <div class="step">
+        <h3>3. User Validation/Rejection Testing</h3>
+        <ol>
+            <li>Select a user and click the "Validate" button</li>
+            <li>Confirm the validation in the confirmation dialog</li>
+            <li>Verify that the user is added to the <code>verifiedUser</code> collection in Firestore</li>
+            <li>Verify that the UI is updated to reflect the validated status</li>
+            <li>Select another user and click the "Reject" button</li>
+            <li>Confirm the rejection in the confirmation dialog</li>
+            <li>Verify that the UI is updated appropriately</li>
+        </ol>
+    </div>
+    
+    <div class="step">
+        <h3>4. Session Management Testing</h3>
+        <ol>
+            <li>Refresh the page and verify that the session is maintained</li>
+            <li>Click the "Logout" button</li>
+            <li>Verify that you are redirected to the login page</li>
+            <li>Verify that you cannot access the dashboard without logging in</li>
+        </ol>
+    </div>
+    
+    <div class="step">
+        <h3>5. Responsive Design Testing</h3>
+        <ol>
+            <li>Test the application on different screen sizes (desktop, tablet, mobile)</li>
+            <li>Verify that the layout adjusts appropriately</li>
+            <li>Verify that all functionality works on different devices</li>
+        </ol>
+    </div>
+    
+    <h2>Known Limitations</h2>
+    <ul>
+        <li>The OTP verification is simulated for demonstration purposes. In a production environment, you would need to implement actual SMS-based OTP verification using Firebase Phone Authentication or a service like Twilio.</li>
+        <li>The user rejection functionality is also simulated. In a production environment, you might want to store rejected users in a separate collection or add a status field to the user document.</li>
+    </ul>
+    
+    <div class="note">
+        <strong>Note:</strong> This test plan is designed for development and testing purposes. Before deploying to production, ensure that you implement proper security rules in Firebase, use environment variables for sensitive information, and follow best practices for web application security.
+    </div>
+</body>
+</html>
