@@ -1,11 +1,11 @@
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBYIPeYip_r1uqJuB2sveh9dJ5Vzd07MIo",
+  apiKey: "API key is a concern for secrecy",// college authorities denied to share now till college denies the project
   authDomain: "collegecampusapp-apas653.firebaseapp.com",
   projectId: "collegecampusapp-apas653",
   storageBucket: "collegecampusapp-apas653.firebasestorage.app",
-  messagingSenderId: "549202264660",
+  messagingSenderId: "xxxxxxxx660",
   appId: "1:549202264660:web:7a503525b201910a00e3c1",
   measurementId: "G-LECKTR7ZK5"
 };
